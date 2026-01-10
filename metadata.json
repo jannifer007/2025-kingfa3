@@ -1,0 +1,7 @@
+{
+  "name": "2024 信息管理部年度颁奖盛典",
+  "description": "一个充满喜庆氛围的年度颁奖页面，集成了 Gemini AI 语音助手，支持语音交互和自动导航颁奖流程。",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
