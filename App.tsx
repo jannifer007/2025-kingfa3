@@ -103,7 +103,31 @@ const App: React.FC = () => {
   const speak = useCallback(async (text: string) => {
     const outCtx = outputAudioContextRef.current;
     if (!outCtx) return;
+
+    // Helper: Browser Native TTS Fallback
+    const fallbackSpeak = (textToSpeak: string) => {
+      console.warn("Using browser fallback TTS for:", textToSpeak);
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.lang = 'zh-CN';
+      utterance.rate = 1.0;
+      
+      // Attempt to set state for lips moving
+      setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
+
+      utterance.onend = () => {
+         setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
+      };
+      
+      utterance.onerror = (e) => {
+         console.error("Browser TTS error:", e);
+         setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    };
+
     setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
+    
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
       const response = await ai.models.generateContent({
@@ -130,10 +154,13 @@ const App: React.FC = () => {
         source.start(nextStartTimeRef.current);
         nextStartTimeRef.current += buffer.duration;
         sourcesRef.current.add(source);
+      } else {
+        throw new Error("No audio data returned from API");
       }
     } catch (err) {
-      console.error("TTS generation failed:", err);
-      setBotState(BotState.IDLE);
+      console.error("Gemini TTS generation failed, falling back to browser TTS:", err);
+      // If quota exceeded (429) or any other error, use fallback
+      fallbackSpeak(text);
     }
   }, []);
 
