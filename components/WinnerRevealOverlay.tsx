@@ -37,7 +37,7 @@ const WinnerRevealOverlay: React.FC<WinnerRevealOverlayProps> = ({ award, isVisi
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 w-full">
             {award.winners.map((winner, idx) => (
               <div key={idx} className="flex flex-col items-center group animate-[slideUp_0.6s_ease-out_backwards]" style={{animationDelay: `${idx * 0.2 + 0.3}s`}}>
-                <div className="relative mb-4 transition-transform duration-300 group-hover:scale-105">
+                <div className="relative mb-4 transition-transform duration-300 group-hover:scale-105 animate-pop-in" style={{animationDelay: `${idx * 0.2 + 0.5}s`}}>
                   <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full animate-spin-slow opacity-70 blur-sm"></div>
                   <img 
                     src={winner.avatar} 
@@ -81,3 +81,4 @@ const WinnerRevealOverlay: React.FC<WinnerRevealOverlayProps> = ({ award, isVisi
 };
 
 export default WinnerRevealOverlay;
+    

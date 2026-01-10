@@ -14,7 +14,7 @@ const AwardCard: React.FC<AwardCardProps> = ({ award, isActive, isRevealed, onSe
     <div 
       id={award.id}
       className={`award-card relative rounded-3xl border 
-        ${isActive ? 'border-yellow-400 bg-red-900/60 shadow-[0_0_30px_rgba(251,191,36,0.3)]' : 'border-white/10 bg-black/20'}
+        ${isActive ? 'animate-glow-pulse bg-red-900/60' : 'border-white/10 bg-black/20'}
         backdrop-blur-md overflow-hidden h-[28rem] flex flex-col items-center justify-center text-center p-8 transition-all duration-500 group hover:bg-white/5`}
     >
       {/* Icon */}
@@ -56,3 +56,4 @@ const AwardCard: React.FC<AwardCardProps> = ({ award, isActive, isRevealed, onSe
 };
 
 export default AwardCard;
+    
