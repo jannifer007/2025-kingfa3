@@ -259,7 +259,7 @@ const App: React.FC = () => {
           moveRobotTo('center');
           setBotState(BotState.CELEBRATING);
           triggerConfetti();
-          speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满结束！感谢大家的辛勤付出，祝大家新年快乐，龙年大吉！");
+          speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满结束！感谢大家的辛勤付出，祝大家新年快乐，马年大吉！");
         }
         break;
         
