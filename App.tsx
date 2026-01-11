@@ -106,39 +106,39 @@ const App: React.FC = () => {
 
     // Helper: Browser Native TTS Fallback
   const fallbackSpeak = (textToSpeak: string) => {
-  console.warn("Using browser fallback TTS for:", textToSpeak);
-  const utterance = new SpeechSynthesisUtterance(textToSpeak);
-  utterance.lang = 'zh-CN';
-  utterance.rate = 1.0;
+    console.warn("Using browser fallback TTS for:", textToSpeak);
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 1.0;
   
-  // 新增：处理语音列表加载
-  const getVoices = () => { /* 定时器重试获取语音列表 */ };
+    // 新增：处理语音列表加载
+    const getVoices = () => { /* 定时器重试获取语音列表 */ };
 
-  // 新增：音色选择逻辑
-  getVoices().then((voices) => {
-    // 精准+模糊匹配晓晓音色
-    const xiaoxiaoVoice = voices.find(voice => 
-      voice.name === "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)"
-    );
-    const fallbackXiaoxiaoVoice = voices.find(voice => 
-      voice.name.includes("Xiaoxiao Online (Natural)")
-    );
-    const selectedVoice = xiaoxiaoVoice || fallbackXiaoxiaoVoice || voices.find(v => v.lang === 'zh-CN') || voices[0];
-    
-    if (selectedVoice) {
-      utterance.voice = selectedVoice;
-      console.log("使用的降级TTS音色:", selectedVoice.name); // 新增日志
-    }
-
-    // 原有状态逻辑（移到回调内）
-    setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
-
-    utterance.onend = () => { /* 状态重置 */ };
-    utterance.onerror = (e) => { /* 错误处理 */ };
-
-    // 朗读（使用选中的晓晓音色）
-    window.speechSynthesis.speak(utterance);
-  });
+    // 新增：音色选择逻辑
+    getVoices().then((voices) => {
+      // 精准+模糊匹配晓晓音色
+      const xiaoxiaoVoice = voices.find(voice => 
+        voice.name === "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)"
+      );
+      const fallbackXiaoxiaoVoice = voices.find(voice => 
+        voice.name.includes("Xiaoxiao Online (Natural)")
+      );
+      const selectedVoice = xiaoxiaoVoice || fallbackXiaoxiaoVoice || voices.find(v => v.lang === 'zh-CN') || voices[0];
+      
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        console.log("使用的降级TTS音色:", selectedVoice.name); // 新增日志
+      }
+  
+      // 原有状态逻辑（移到回调内）
+      setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
+  
+      utterance.onend = () => { /* 状态重置 */ };
+      utterance.onerror = (e) => { /* 错误处理 */ };
+  
+      // 朗读（使用选中的晓晓音色）
+      window.speechSynthesis.speak(utterance);
+    };
 };
       
       // Attempt to set state for lips moving
