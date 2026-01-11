@@ -105,12 +105,7 @@ const App: React.FC = () => {
     if (!outCtx) return;
 
     // Helper: Browser Native TTS Fallback
-    const fallbackSpeak = (textToSpeak: string) => {
-      console.warn("Using browser fallback TTS for:", textToSpeak);
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.lang = 'zh-CN';
-      utterance.rate = 1.0;
-      const fallbackSpeak = (textToSpeak: string) => {
+  const fallbackSpeak = (textToSpeak: string) => {
   console.warn("Using browser fallback TTS for:", textToSpeak);
   const utterance = new SpeechSynthesisUtterance(textToSpeak);
   utterance.lang = 'zh-CN';
