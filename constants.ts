@@ -23,7 +23,7 @@ export const AWARDS: Award[] = [
     description: '初入职场便展露锋芒，以饱满的热情和惊人的成长速度，为团队注入了新鲜血液。',
     icon: 'fa-seedling',
     winners: [
-      { name: '林晓微', department: '前端开发组', avatar: 'https://picsum.photos/seed/n1/100/100' },
+      { name: '林晓微', department: '前端开发组', avatar: 'https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6' },
       { name: '张子轩', department: '数据运营组', avatar: 'https://picsum.photos/seed/n2/100/100' }
     ],
     scripts: {
