@@ -273,7 +273,7 @@ const App: React.FC = () => {
           setTimeout(() => speak(AWARDS[nextIdx].scripts.preReveal), 1000);
         } else {
           setPhase(CeremonyPhase.FINISHED);
-          moveRobotTo('center');
+          moveRobotTo('random'); // Keep it floating
           setBotState(BotState.CELEBRATING);
           triggerConfetti();
           speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满礼成！再次祝贺所有获奖的伙伴，你们是我们的骄傲！感谢大家的辛勤付出，亲切地祝大家2026马年大吉，万事如意，马到成功！");
@@ -339,6 +339,14 @@ const App: React.FC = () => {
     }
   };
 
+  // Pagination & Display Logic
+  const ITEMS_PER_PAGE = 6;
+  const isFinished = phase === CeremonyPhase.FINISHED;
+  const visibleStart = Math.floor(currentAwardIndex / ITEMS_PER_PAGE) * ITEMS_PER_PAGE;
+  
+  // When finished, show all awards. Otherwise show the current page.
+  const visibleAwards = isFinished ? AWARDS : AWARDS.slice(visibleStart, visibleStart + ITEMS_PER_PAGE);
+
   return (
     <div className="min-h-screen red-gradient text-white selection:bg-yellow-500/30 overflow-hidden font-sans relative flex flex-col">
       
@@ -381,27 +389,36 @@ const App: React.FC = () => {
       )}
 
       {/* Main Content Area - Grid of Awards */}
-      <div className={`flex-1 flex flex-col transition-all duration-1000 ${phase === CeremonyPhase.START_SCREEN ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-          <header className="relative z-10 text-center pt-8 md:pt-10 mb-6">
-            <div className="flex justify-center items-center gap-4 mb-2">
+      <div className={`flex-1 flex flex-col justify-center transition-all duration-1000 ${phase === CeremonyPhase.START_SCREEN ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+          <header className="relative z-10 text-center pt-4 mb-4 shrink-0">
+            <div className="flex justify-center items-center gap-4">
                 <i className="fas fa-dragon text-yellow-500 text-3xl animate-pulse"></i>
-                <h1 className="text-2xl md:text-4xl font-black text-white drop-shadow-xl tracking-wider">
+                <h1 className="text-2xl md:text-3xl font-black text-white drop-shadow-xl tracking-wider">
                 KINGFA 金发科技
                 </h1>
                 <i className="fas fa-dragon text-yellow-500 text-3xl animate-pulse scale-x-[-1]"></i>
             </div>
           </header>
 
-          <main className="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 pb-20 content-start">
-            {AWARDS.map((award, index) => (
-              <AwardCard 
-                key={award.id}
-                award={award}
-                isActive={currentAwardIndex === index && phase !== CeremonyPhase.FINISHED}
-                isRevealed={index < currentAwardIndex || (index === currentAwardIndex && (phase === CeremonyPhase.REVEAL || phase === CeremonyPhase.POST_REVEAL))}
-                onSelect={() => {}} 
-              />
-            ))}
+          <main className={`relative z-10 w-full max-w-[1600px] mx-auto grid 
+            ${isFinished 
+                ? 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 content-center h-full overflow-hidden py-4' 
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 content-center h-full max-h-[90vh]'
+            } px-8`}>
+            {visibleAwards.map((award, index) => {
+              // Calculate global index
+              const globalIndex = isFinished ? index : visibleStart + index;
+              return (
+                <AwardCard 
+                  key={award.id}
+                  award={award}
+                  isActive={currentAwardIndex === globalIndex && !isFinished}
+                  isRevealed={isFinished || globalIndex < currentAwardIndex || (globalIndex === currentAwardIndex && (phase === CeremonyPhase.REVEAL || phase === CeremonyPhase.POST_REVEAL))}
+                  onSelect={() => {}} 
+                  isSummary={isFinished}
+                />
+              );
+            })}
           </main>
       </div>
 
@@ -419,14 +436,6 @@ const App: React.FC = () => {
         onTest={(text) => speak(text)}
       />
 
-      {phase === CeremonyPhase.FINISHED && (
-        <div className="fixed inset-0 z-[55] pointer-events-none flex flex-col items-center justify-center">
-            <h2 className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-t from-yellow-400 to-white drop-shadow-[0_0_50px_rgba(251,191,36,0.8)] animate-bounce mb-8">
-                明年见！
-            </h2>
-        </div>
-      )}
-      
     </div>
   );
 };
