@@ -29,8 +29,8 @@ export const AWARDS: Award[] = [
     citation: '你的专业是团队的基石，你的严谨是流程的保障。在平凡的岗位上，你用不平凡的坚持，诠释了专员的价值与担当，是部门高效运转最坚实的后盾。',
     icon: 'fa-user-tag',
     winners: [
-      { name: '吴煜春', department: '培训专员', avatar: '/public/images/陈乐.jpg' },
-      { name: '资城元', department: '行政专员', avatar: '/images/资城元.jpg' },
+      { name: '吴煜春', department: '培训专员', avatar: '/public/images/chenle.png' },
+      { name: '资城元', department: '行政专员', avatar: '/images/zcy.png' },
       { name: '张茜', department: '项目专员', avatar: 'images/张茜.jpg' },
       { name: '袁健', department: ' 保密专员', avatar: 'images/袁健.jpg' },
       { name: '龙月桂', department: '绩效专员', avatar: 'images/龙月桂.jpg' },
