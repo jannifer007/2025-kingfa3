@@ -24,7 +24,7 @@ export const AWARDS: Award[] = [
     icon: 'fa-seedling',
     winners: [
       { name: '林晓微', department: '前端开发组', avatar: 'https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6' },
-      { name: '张子轩', department: '数据运营组', avatar: './林晓微.png' }
+      { name: '张子轩', department: '数据运营组', avatar: '/林晓微.png' }
     ],
     scripts: {
       preReveal: "首先要揭晓的是【优秀新人奖】。他们初出茅庐，却敢于挑战；他们是金发科技未来的希望。让我们看看是哪两位新星脱颖而出？",
