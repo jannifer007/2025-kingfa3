@@ -7,7 +7,7 @@ export interface Winner {
 
 export interface AwardScripts {
   preReveal: string; // "Teaser" before opening the card
-  reveal: string;    // The actual citation and name announcement
+  reveal: string;    // The actual citation and name announcement (Spoken by Robot)
   postReveal: string; // Closing remark for this award
 }
 
@@ -15,6 +15,7 @@ export interface Award {
   id: string;
   title: string;
   description: string;
+  citation: string; // The formal text displayed on the overlay card
   icon: string;
   winners: Winner[];
   scripts: AwardScripts;

@@ -1,11 +1,10 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AWARDS, OPENING_SCRIPT, MUSIC_PATHS } from './constants';
+import { AWARDS, OPENING_SCRIPT } from './constants';
 import { Award, BotState, CeremonyPhase } from './types';
 import AwardCard from './components/AwardCard';
 import Robot from './components/Robot';
 import WinnerRevealOverlay from './components/WinnerRevealOverlay';
-import VoiceSettings, { VoiceConfig } from './components/VoiceSettings';
 
 const App: React.FC = () => {
   const [phase, setPhase] = useState<CeremonyPhase>(CeremonyPhase.START_SCREEN);
@@ -14,82 +13,24 @@ const App: React.FC = () => {
   
   const [botState, setBotState] = useState<BotState>(BotState.IDLE);
   const [botPosition, setBotPosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 - 50 });
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   
   const outputAudioContextRef = useRef<AudioContext | null>(null);
   const hasStartedSpeechRef = useRef(false);
-  const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
-
-  // Music Refs - Only Main BGM
-  const mainBgmRef = useRef<HTMLAudioElement | null>(null);
-
-  // Voice Configuration State
-  const [voiceConfig, setVoiceConfig] = useState<VoiceConfig>({
-    browserVoiceURI: ''
-  });
-
-  const safePlay = (audio: HTMLAudioElement | null) => {
-    if (!audio) return;
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        // Suppress errors about missing files or autoplay policies
-        console.debug("Audio playback prevented or failed:", error.message);
-      });
-    }
-  };
-
-  const safePause = (audio: HTMLAudioElement | null) => {
-    if (!audio) return;
-    try {
-        audio.pause();
-    } catch (e) {
-        console.debug("Audio pause error:", e);
-    }
-  };
 
   useEffect(() => {
     setBgParticles(Array.from({ length: 40 }, (_, i) => i));
-
-    // Initialize Music with error handling
-    const initMusic = (path: string, volume: number) => {
-        const audio = new Audio(path);
-        audio.loop = true;
-        audio.volume = volume;
-        audio.onerror = (e) => {
-            console.debug(`Failed to load audio: ${path}`, e);
-        };
-        return audio;
-    };
-
-    mainBgmRef.current = initMusic(MUSIC_PATHS.MAIN_BGM, 0.4);
     
-    // Initial browser voice setup
-    const initVoice = () => {
-       const voices = window.speechSynthesis.getVoices();
-       if (voices.length > 0 && !voiceConfig.browserVoiceURI) {
-          // Priority: Microsoft Xiaoxiao -> Google Chinese -> Any Zh -> First
-          const defaultVoice = voices.find(v => v.name.includes('Xiaoxiao')) || 
-                             voices.find(v => v.name.includes('Google') && v.lang.toLowerCase().includes('zh')) ||
-                             voices.find(v => v.lang === 'zh-CN') || 
-                             voices.find(v => v.lang.toLowerCase().startsWith('zh')) || 
-                             voices[0];
-          if (defaultVoice) {
-            setVoiceConfig({ browserVoiceURI: defaultVoice.voiceURI });
-          }
-       }
+    // Load voices
+    const loadVoices = () => {
+        const vs = window.speechSynthesis.getVoices();
+        setVoices(vs);
     };
-    initVoice();
-    window.speechSynthesis.onvoiceschanged = initVoice;
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices();
 
-    return () => {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
-      window.speechSynthesis.onvoiceschanged = null;
-      // Cleanup Audio
-      safePause(mainBgmRef.current);
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    return () => { window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
 
   const initAudio = useCallback(async () => {
     if (!outputAudioContextRef.current) {
@@ -104,6 +45,7 @@ const App: React.FC = () => {
     const ctx = outputAudioContextRef.current;
     if (!ctx) return;
     const t = ctx.currentTime;
+    // Sci-fi power up sound
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.frequency.setValueAtTime(220, t);
@@ -136,45 +78,40 @@ const App: React.FC = () => {
     });
   }, []);
 
-  const speak = useCallback((text: string, onEnd?: () => void) => {
-    window.speechSynthesis.cancel();
-    
-    setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
-    
+  const speak = useCallback((text: string) => {
+    window.speechSynthesis.cancel(); // Interrupt previous speech
+
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Store in ref
-    currentUtteranceRef.current = utterance;
-
-    const voices = window.speechSynthesis.getVoices();
-    const selectedVoice = voices.find(v => v.voiceURI === voiceConfig.browserVoiceURI);
+    // Priority: Specific Microsoft Voice -> Any Chinese Voice -> Default
+    const targetVoice = voices.find(v => v.name === 'Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)') ||
+                        voices.find(v => v.name.includes('Xiaoxiao')) ||
+                        voices.find(v => v.lang === 'zh-CN') || 
+                        voices.find(v => v.lang.startsWith('zh'));
     
-    if (selectedVoice) {
-      utterance.voice = selectedVoice;
+    if (targetVoice) {
+      utterance.voice = targetVoice;
     }
-    
+
     utterance.rate = 1.0;
     utterance.volume = 1.0;
-    
+
+    // Set speaking state
+    setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.SPEAKING);
+
     utterance.onend = () => {
-      setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
-      currentUtteranceRef.current = null;
-      if (onEnd) onEnd();
+       setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
     };
     
     utterance.onerror = (e) => {
-        if (e.error === 'interrupted' || e.error === 'canceled') {
-          return;
-        }
-        console.error("TTS Error:", e.error);
-        setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
-        currentUtteranceRef.current = null;
+       console.error("Browser TTS error:", e);
+       setBotState(prev => prev === BotState.CELEBRATING ? BotState.CELEBRATING : BotState.IDLE);
     };
-    
-    window.speechSynthesis.speak(utterance);
-  }, [voiceConfig]);
 
-  const moveRobotTo = (location: 'center' | 'bottom-right' | 'random') => {
+    window.speechSynthesis.speak(utterance);
+  }, [voices]);
+
+  const moveRobotTo = (location: 'center' | 'bottom-right' | 'top-right' | 'random') => {
     if (location === 'center') {
       setBotPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 - 50 });
       return;
@@ -183,15 +120,17 @@ const App: React.FC = () => {
         setBotPosition({ x: window.innerWidth - 120, y: window.innerHeight - 120 });
         return;
     }
+    if (location === 'top-right') {
+        setBotPosition({ x: window.innerWidth - 80, y: 120 });
+        return;
+    }
     if (location === 'random') {
-        // Floating Bubble Logic:
-        // Keep robot within the central 60% of the screen (20% margin) to avoid edges.
-        const marginX = window.innerWidth * 0.2;
-        const marginY = window.innerHeight * 0.15;
-        
+        // Floating anywhere on screen like a bubble, keeping slight padding
+        const padX = window.innerWidth * 0.1;
+        const padY = window.innerHeight * 0.1;
         setBotPosition({ 
-            x: marginX + Math.random() * (window.innerWidth - 2 * marginX), 
-            y: marginY + Math.random() * (window.innerHeight - 2 * marginY) 
+            x: padX + Math.random() * (window.innerWidth - 2 * padX), 
+            y: padY + Math.random() * (window.innerHeight - 2 * padY) 
         });
         return;
     }
@@ -199,19 +138,14 @@ const App: React.FC = () => {
 
   const handleStartInteraction = async () => {
     await initAudio();
-    
-    // Start Main BGM
-    // Only play if it is paused to avoid errors
-    if (mainBgmRef.current && mainBgmRef.current.paused) {
-        safePlay(mainBgmRef.current);
-    }
-
     if (!hasStartedSpeechRef.current) {
         hasStartedSpeechRef.current = true;
         playStartSound();
         speak(OPENING_SCRIPT);
     } else {
-        setPhase(CeremonyPhase.OPENING);
+        // If speech already started, proceed to phase change
+        setPhase(CeremonyPhase.OPENING); // Using OPENING as transitional phase to grid
+        // Immediately go to pre-reveal of first award after opening logic
         setTimeout(() => advanceCeremony(), 500);
     }
   };
@@ -222,41 +156,38 @@ const App: React.FC = () => {
 
     switch (phase) {
       case CeremonyPhase.START_SCREEN:
-        // Transition from Start -> Opening
+        // Handled by handleStartInteraction
         setPhase(CeremonyPhase.OPENING);
-        // Main BGM should already be playing from handleStartInteraction
+        // We stay on Opening phase briefly or move directly to Pre-Reveal logic
+        // But per request, Robot starts speaking on start screen. 
+        // advanceCeremony is called to Move FROM Start Screen TO Grid.
+        // So here we assume user wants to see the grid now.
         setTimeout(() => {
             setPhase(CeremonyPhase.PRE_REVEAL);
-            moveRobotTo('random'); // Moves to a random floating spot
+            moveRobotTo('top-right');
             setBotState(BotState.MOVING);
             setTimeout(() => speak(currentAward.scripts.preReveal), 1000);
         }, 1000);
         break;
 
       case CeremonyPhase.OPENING:
+         // Bridge phase
          setPhase(CeremonyPhase.PRE_REVEAL);
-         moveRobotTo('random'); // Moves to a random floating spot
+         moveRobotTo('top-right');
          setBotState(BotState.MOVING);
-         // Ensure Main BGM is playing
-         if (mainBgmRef.current && mainBgmRef.current.paused) safePlay(mainBgmRef.current);
          speak(currentAward.scripts.preReveal);
          break;
 
       case CeremonyPhase.PRE_REVEAL:
-        // Main BGM continues loop
         setPhase(CeremonyPhase.REVEAL);
-        moveRobotTo('bottom-right'); // Stays at bottom right for reveal to not block content
+        moveRobotTo('bottom-right'); 
         setBotState(BotState.CELEBRATING); 
         playRevealSound(); 
         triggerConfetti();
-        
-        speak(currentAward.scripts.reveal, () => {
-            // Callback empty, music continues
-        });
+        speak(currentAward.scripts.reveal);
         break;
 
       case CeremonyPhase.REVEAL:
-        // Main BGM continues loop
         setPhase(CeremonyPhase.POST_REVEAL);
         setBotState(BotState.CELEBRATING); 
         setTimeout(() => speak(currentAward.scripts.postReveal), 500);
@@ -267,16 +198,15 @@ const App: React.FC = () => {
           const nextIdx = currentAwardIndex + 1;
           setCurrentAwardIndex(nextIdx);
           setPhase(CeremonyPhase.PRE_REVEAL);
-          moveRobotTo('random'); // Moves to a random floating spot
+          moveRobotTo('top-right');
           setBotState(BotState.MOVING); 
-          // Main BGM continues playing
           setTimeout(() => speak(AWARDS[nextIdx].scripts.preReveal), 1000);
         } else {
           setPhase(CeremonyPhase.FINISHED);
           moveRobotTo('center');
           setBotState(BotState.CELEBRATING);
           triggerConfetti();
-          speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满礼成！再次祝贺所有获奖的伙伴，你们是我们的骄傲！感谢大家的辛勤付出，亲切地祝大家2026马年大吉，万事如意，马到成功！");
+          speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满结束！感谢大家的辛勤付出，祝大家新年快乐，龙年大吉！");
         }
         break;
         
@@ -298,14 +228,15 @@ const App: React.FC = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [phase, currentAwardIndex, speak]);
+  }, [phase, currentAwardIndex, voices]); // Added voices dependency to keep closure fresh if needed
 
+  // Full screen wandering for Idle states (Start/Finished)
   useEffect(() => {
     if (phase === CeremonyPhase.START_SCREEN || phase === CeremonyPhase.FINISHED) {
-      moveRobotTo('random');
+      moveRobotTo('random'); // Initial move
       const interval = setInterval(() => {
         moveRobotTo('random');
-      }, 5000);
+      }, 5000); // Re-position every 5 seconds
       return () => clearInterval(interval);
     }
   }, [phase]);
@@ -411,13 +342,6 @@ const App: React.FC = () => {
       />
 
       <Robot state={botState} position={botPosition} />
-      
-      {/* Settings Panel */}
-      <VoiceSettings 
-        config={voiceConfig} 
-        onConfigChange={setVoiceConfig}
-        onTest={(text) => speak(text)}
-      />
 
       {phase === CeremonyPhase.FINISHED && (
         <div className="fixed inset-0 z-[55] pointer-events-none flex flex-col items-center justify-center">
@@ -432,3 +356,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+    

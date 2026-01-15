@@ -10,6 +10,9 @@ interface AwardCardProps {
 }
 
 const AwardCard: React.FC<AwardCardProps> = ({ award, isActive, isRevealed, onSelect }) => {
+  // Determine if we need compact view for many winners
+  const isCompact = award.winners.length > 3;
+
   return (
     <div 
       id={award.id}
@@ -18,8 +21,8 @@ const AwardCard: React.FC<AwardCardProps> = ({ award, isActive, isRevealed, onSe
         backdrop-blur-md overflow-hidden h-[28rem] flex flex-col items-center justify-center text-center p-8 transition-all duration-500 group hover:bg-white/5`}
     >
       {/* Icon */}
-      <div className={`w-28 h-28 rounded-full flex items-center justify-center mb-8 transition-all duration-500 shadow-xl
-        ${isRevealed ? 'bg-yellow-500 text-red-900 scale-90' : 'bg-gradient-to-br from-white/10 to-white/5 text-white/60 border border-white/10'}`}>
+      <div className={`w-28 h-28 rounded-full flex items-center justify-center mb-6 transition-all duration-500 shadow-xl
+        ${isRevealed ? 'bg-yellow-500 text-red-900 scale-75 mb-2' : 'bg-gradient-to-br from-white/10 to-white/5 text-white/60 border border-white/10'}`}>
         <i className={`fas ${award.icon} text-5xl`}></i>
       </div>
 
@@ -33,13 +36,17 @@ const AwardCard: React.FC<AwardCardProps> = ({ award, isActive, isRevealed, onSe
          <p className="text-lg text-white/50 line-clamp-3 px-4 leading-relaxed font-light">{award.description}</p>
       )}
 
-      {/* Revealed State: Small Winners Display (Post-reveal history) */}
+      {/* Revealed State: Winners Display */}
       {isRevealed && (
-        <div className="flex gap-4 mt-4 animate-[fadeIn_1s]">
+        <div className={`flex flex-wrap justify-center content-center gap-2 mt-2 w-full animate-[fadeIn_1s] overflow-hidden`}>
            {award.winners.map((winner, idx) => (
-             <div key={idx} className="flex flex-col items-center" title={winner.name}>
-               <img src={winner.avatar} alt={winner.name} className="w-14 h-14 rounded-full border-2 border-yellow-500/50 object-cover shadow-lg" />
-               <span className="text-sm text-yellow-500 mt-2 font-bold">{winner.name}</span>
+             <div key={idx} className="flex flex-col items-center" title={`${winner.name} - ${winner.department}`}>
+               <img 
+                 src={winner.avatar} 
+                 alt={winner.name} 
+                 className={`${isCompact ? 'w-10 h-10' : 'w-14 h-14'} rounded-full border border-yellow-500/50 object-cover shadow-lg`} 
+               />
+               <span className={`text-yellow-500 font-bold ${isCompact ? 'text-xs' : 'text-sm'} mt-1`}>{winner.name}</span>
              </div>
            ))}
         </div>
