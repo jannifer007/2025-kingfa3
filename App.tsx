@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
   // Volume Constants
   const BGM_VOLUME_NORMAL = 0.15; // Reduced base volume
-  const BGM_VOLUME_LOW = 0.05;    // Volume while speaking (ducking)
+  const BGM_VOLUME_LOW = 0.09;    // Volume while speaking (ducking)
 
   // Voice Configuration State
   const [voiceConfig, setVoiceConfig] = useState<VoiceConfig>({
