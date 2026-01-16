@@ -118,7 +118,7 @@ export const AWARDS: Award[] = [
     icon: 'fa-tools',
     winners: [
       { name: '邓祥', department: '信息门户实施组', avatar: 'images/邓祥.jpg' },
-      { name: '蔡梦清', department: '财务实施组', avatar: 'images/蔡梦清.jpg' },
+      { name: '蔡梦清', department: '财务实施组', avatar: '/images/cmq.jpg' },
       { name: '陈华章', department: '研发质量组', avatar: 'images/陈华章.jpg' }
     ],
     scripts: {
