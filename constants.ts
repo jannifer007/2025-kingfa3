@@ -19,7 +19,7 @@ export const MUSIC_PATHS = {
 };
 
 // Opening script: Introduction of the Host
-export const OPENING_SCRIPT = `尊敬的各位领导、各位同事，大家晚上好！我是本次盛典的AI主持人——小信。欢迎来到二零二五金发科技信息管理部年度颁奖盛典！今晚，星光璀璨，我们将共同见证那些在过去一年里表现卓越的个人与团队。请大家调整呼吸，准备迎接属于我们的荣耀时刻！`;
+export const OPENING_SCRIPT = `尊敬的各位领导、各位同事，大家上午好！我是本次盛典的AI主持人——小信。欢迎来到二零二五金发科技信息管理部年度颁奖盛典！今晚，星光璀璨，我们将共同见证那些在过去一年里表现卓越的个人与团队。请大家调整呼吸，准备迎接属于我们的荣耀时刻！`;
 
 export const AWARDS: Award[] = [
   {
