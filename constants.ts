@@ -54,7 +54,7 @@ export const AWARDS: Award[] = [
     icon: 'fa-seedling',
     winners: [
       { name: '阮睿达', department: 'AI应用组', avatar: 'images/阮睿达.jpg' },
-      { name: '常靖楠', department: '生产制造组', avatar: 'images/常靖楠.jpg' }
+      { name: '常靖楠', department: '生产制造组', avatar: '/images/CJN.jpg' }
     ],
     scripts: {
       preReveal: `长江后浪推前浪，接下来颁发的是【部门最佳新人奖】。他们初出茅庐却锋芒毕露，为团队注入了新鲜血液。`,
@@ -69,7 +69,7 @@ export const AWARDS: Award[] = [
     citation: '蜕变是痛苦的，但化茧成蝶是美丽的。你从跟跑到领跑，用汗水浇灌成长，用实力刷新高度。今天的进步，是明天卓越的基石，你是奋斗者最好的注脚。',
     icon: 'fa-chart-line',
     winners: [
-      { name: '符桂玲', department: '数据中心组', avatar: 'images/符桂玲.jpg' },
+      { name: '符桂玲', department: '数据中心组', avatar: '/images/FGL.jpg' },
       { name: '杨镇醴', department: '信息安全组', avatar: 'images/杨镇醴.jpg' },
       { name: '吴煜春', department: 'Java开发组', avatar: 'images/吴煜春.jpg' }
     ],
