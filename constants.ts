@@ -29,16 +29,16 @@ export const AWARDS: Award[] = [
     citation: '你的专业是团队的基石，你的严谨是流程的保障。在平凡的岗位上，你用不平凡的坚持，诠释了专员的价值与担当，是部门高效运转最坚实的后盾。',
     icon: 'fa-user-tag',
     winners: [
-      { name: '吴煜春', department: '培训专员', avatar: '/images/chenle.png' },
-      { name: '资城元', department: '行政专员', avatar: '/images/zcy.png' },
-      { name: '张茜', department: '项目专员', avatar: 'images/张茜.jpg' },
-      { name: '袁健', department: ' 保密专员', avatar: 'images/袁健.jpg' },
-      { name: '龙月桂', department: '绩效专员', avatar: 'images/龙月桂.jpg' },
-      { name: '谢雨桦', department: '文档专员', avatar: 'images/谢雨桦.jpg' },
-      { name: '刘海滨', department: '预算专员', avatar: 'images/刘海滨.jpg' },
-      { name: '容文康', department: '标准专员', avatar: 'images/容文康.jpg' },
-      { name: '周盛佳', department: '架构专员', avatar: 'images/周盛佳.jpg' },
-      { name: '何柳琴', department: '固定资产专员', avatar: 'images/何柳琴.jpg' }
+                  { name: '吴煜春', department: '培训专员', avatar: '/images/WYC.jpg' },
+              { name: '资城元', department: '行政专员', avatar: '/images/ZCY.jpg' },
+              { name: '张茜', department: '项目专员', avatar: '/images/ZQ.jpg' },
+              { name: '袁健', department: '保密专员', avatar: '/images/YJ.jpg' },
+              { name: '龙月桂', department: '绩效专员', avatar: '/images/LYG.jpg' },
+              { name: '谢雨桦', department: '文档专员', avatar: '/images/XYH.jpg' },
+              { name: '刘海滨', department: '预算专员', avatar: '/images/LHB.jpg' },
+              { name: '容文康', department: '标准专员', avatar: '/images/RWK.jpg' },
+              { name: '周盛佳', department: '架构专员', avatar: '/images/ZSJ.jpg' },
+              { name: '何柳琴', department: '固定资产专员', avatar: '/images/HLQ.jpg' }
     ],
     scripts: {
       preReveal: `盛典第一项，我们将颁发【优秀专员】奖。他们在各自的职能领域里深耕细作，是部门高效运转的坚实保障。`,
@@ -53,8 +53,8 @@ export const AWARDS: Award[] = [
     citation: '初生牛犊不怕虎，鲜衣怒马少年时。你以蓬勃的朝气注入团队，用快速的成长证明潜力。虽是新人，却展现出不凡的实力，未来星辰大海，任你翱翔。',
     icon: 'fa-seedling',
     winners: [
-      { name: '阮睿达', department: 'AI应用组', avatar: 'images/阮睿达.jpg' },
-      { name: '常靖楠', department: '生产制造组', avatar: '/images/CJN.jpg' }
+            { name: '阮睿达', department: 'AI应用组', avatar: '/images/RRD.jpg' },
+            { name: '常靖楠', department: '生产制造组', avatar: '/images/CJN.jpg' }
     ],
     scripts: {
       preReveal: `长江后浪推前浪，接下来颁发的是【部门最佳新人奖】。他们初出茅庐却锋芒毕露，为团队注入了新鲜血液。`,
@@ -69,9 +69,9 @@ export const AWARDS: Award[] = [
     citation: '蜕变是痛苦的，但化茧成蝶是美丽的。你从跟跑到领跑，用汗水浇灌成长，用实力刷新高度。今天的进步，是明天卓越的基石，你是奋斗者最好的注脚。',
     icon: 'fa-chart-line',
     winners: [
-      { name: '符桂玲', department: '数据中心组', avatar: '/images/FGL.jpg' },
-      { name: '杨镇醴', department: '信息安全组', avatar: 'images/杨镇醴.jpg' },
-      { name: '吴煜春', department: 'Java开发组', avatar: 'images/吴煜春.jpg' }
+            { name: '符桂玲', department: '数据中心组', avatar: '/images/FGL.jpg' },
+            { name: '杨镇醴', department: '信息安全组', avatar: '/images/YZL.jpg' },
+            { name: '吴煜春', department: 'Java开发组', avatar: '/images/WYC.jpg' }
     ],
     scripts: {
       preReveal: `成长是职场最美的风景，下面揭晓【部门最佳进步奖】。`,
@@ -86,7 +86,7 @@ export const AWARDS: Award[] = [
     citation: '沧海横流方显英雄本色。关键时刻，你挺身而出；重任在肩，你义无反顾。你用行动诠释了担当，用业绩书写了忠诚，为部门发展立下了汗马功劳。',
     icon: 'fa-trophy',
     winners: [
-      { name: '何柳琴', department: '服务管理组', avatar: 'images/何柳琴.jpg' }
+          { name: '何柳琴', department: '服务管理组', avatar: '/images/HLQ.jpg' }    
     ],
     scripts: {
       preReveal: `接下来这个奖项分量十足，【部门突出贡献奖】属于那些关键时刻顶得上的英雄。`,
@@ -101,8 +101,8 @@ export const AWARDS: Award[] = [
     citation: '代码是你的语言，键盘是你的武器。在0与1的数字世界里，你构建起坚固的系统堡垒。你用精湛的技术攻克难题，用持续的创新驱动业务前行。',
     icon: 'fa-code',
     winners: [
-      { name: '余泓希', department: 'ABAP开发组', avatar: 'images/余泓希.jpg' },
-      { name: '周震宇', department: 'ABAP开发组', avatar: 'images/周震宇.jpg' }
+            { name: '余泓希', department: 'ABAP开发组', avatar: '/images/YHX.jpg' },
+            { name: '周震宇', department: 'ABAP开发组', avatar: '/images/ZZY.jpg' }
     ],
     scripts: {
       preReveal: `代码构建世界，创新引领未来。下面颁发【开发先锋奖】。`,
@@ -117,9 +117,9 @@ export const AWARDS: Award[] = [
     citation: '你是连接技术与业务的桥梁，是项目落地的攻坚力量。深入一线，倾听需求，服务用户，你用专业的实施能力和极佳的服务意识，让系统价值完美绽放。',
     icon: 'fa-tools',
     winners: [
-      { name: '邓祥', department: '信息门户实施组', avatar: 'images/邓祥.jpg' },
-      { name: '蔡梦清', department: '财务实施组', avatar: '/images/cmq.jpg' },
-      { name: '陈华章', department: '研发质量组', avatar: 'images/陈华章.jpg' }
+        { name: '邓祥', department: '信息门户实施组', avatar: '/images/DX.jpg' },
+        { name: '蔡梦清', department: '财务实施组', avatar: '/images/CMQ.jpg' },
+        { name: '陈华章', department: '研发质量组', avatar: '/images/CHZ.jpg' }
     ],
     scripts: {
       preReveal: `他们深入一线，让系统真正产生价值。接下来颁发【实施先锋奖】。`,
@@ -134,8 +134,8 @@ export const AWARDS: Award[] = [
     citation: '探索数据的奥秘，点亮智能的未来。你敢于尝试，勇于创新，将前沿技术转化为生产力。在数字化转型的浪潮中，你是最勇敢的弄潮儿。',
     icon: 'fa-brain',
     winners: [
-      { name: '陈乐', department: 'AI应用组', avatar: 'images/陈乐.jpg' },
-      { name: '欧阳梓贤', department: 'BI应用组', avatar: 'images/欧阳梓贤.jpg' }
+          { name: '陈乐', department: 'AI应用组', avatar: '/images/CL.jpg' },
+          { name: '欧阳梓贤', department: 'BI应用组', avatar: '/images/OYZX.jpg' }
     ],
     scripts: {
       preReveal: `数据驱动决策，智能点亮未来。下面揭晓【数据与智能先锋】。`,
@@ -150,9 +150,9 @@ export const AWARDS: Award[] = [
     citation: '默默无闻，却是中流砥柱。你日夜守护着网络的畅通，保障着数据的安全。在看不见的战线上，你是信息高速公路最可靠的守护者。',
     icon: 'fa-server',
     winners: [
-      { name: '林世乐', department: '网络组', avatar: 'images/林世乐.jpg' },
-      { name: '王耀斌', department: '数据中心组', avatar: 'images/王耀斌.jpg' },
-      { name: '苏洋', department: '服务管理组', avatar: 'images/苏洋.jpg' }
+        { name: '林世乐', department: '网络组', avatar: '/images/LSL.jpg' },
+        { name: '王耀斌', department: '数据中心组', avatar: '/images/WYB.jpg' },
+        { name: '苏洋', department: '服务管理组', avatar: '/images/SY.jpg' }
     ],
     scripts: {
       preReveal: `他们是幕后的英雄，守护着数字世界的基石。接下来颁发【基础设施先锋】奖。`,
@@ -167,7 +167,7 @@ export const AWARDS: Award[] = [
     citation: '扎根属地，心系一线。距离从未阻隔你的热情，服务始终在线。你用实际行动，诠释了“客户至上”的服务理念，是基地同事最信赖的伙伴。',
     icon: 'fa-star',
     winners: [
-      { name: '梁金东', department: '属地组', avatar: 'images/梁金东.jpg' }
+          { name: '梁金东', department: '属地组', avatar: '/images/LJD.jpg' }
     ],
     scripts: {
       preReveal: `我们的服务触角延伸至每一个角落，下面颁发【基地服务之星】。`,
@@ -182,8 +182,8 @@ export const AWARDS: Award[] = [
     citation: '运筹帷幄之中，决胜千里之外。你统筹全局，协调各方，带领团队攻坚克难。在复杂的项目中，你是指挥若定的船长，引领团队抵达成功的彼岸。',
     icon: 'fa-tasks',
     winners: [
-      { name: '龙月桂', department: '销售贸易实施组', avatar: 'images/龙月桂.jpg' },
-      { name: '章浩鑫', department: '网络组', avatar: 'images/章浩鑫.jpg' }
+        { name: '龙月桂', department: '销售贸易实施组', avatar: '/images/LYG.jpg' },
+        { name: '章浩鑫', department: '网络组', avatar: '/images/CHX.jpg' }
     ],
     scripts: {
       preReveal: `运筹帷幄，决胜千里。接下来要揭晓的是【优秀项目经理】。`,
@@ -198,7 +198,7 @@ export const AWARDS: Award[] = [
     citation: '你的优秀是一种习惯，你的业绩是一面旗帜。综合素质过硬，工作表现卓越，你在团队中散发着光与热，是大家公认的楷模与标杆。',
     icon: 'fa-user-check',
     winners: [
-      { name: '李晓东', department: '供应链实施组', avatar: 'images/李晓东.jpg' }
+        { name: '李晓东', department: '供应链实施组', avatar: '/images/LXD.jpg' }
     ],
     scripts: {
       preReveal: `综合素质过硬，业绩表现卓越，下面颁发【部门优秀员工】大奖。`,
@@ -213,7 +213,7 @@ export const AWARDS: Award[] = [
     citation: '领头羊的视野决定团队的方向。你不断突破自我，提升管理艺术，带领团队在变革中前行，在挑战中成长，实现了个人与团队的双重飞跃。',
     icon: 'fa-chess-knight',
     winners: [
-      { name: '魏阳', department: 'Java开发组', avatar: 'images/魏阳.jpg' }
+          { name: '魏阳', department: 'Java开发组', avatar: '/images/WY.jpg' }
     ],
     scripts: {
       preReveal: `火车跑得快，全靠车头带。接下来颁发【组长进步奖】。`,
@@ -228,16 +228,16 @@ export const AWARDS: Award[] = [
     citation: '聚沙成塔，众志成城。你们目标一致，协作无间，用汗水浇灌荣誉。超额完成各项KPI指标，用完美的数据交付了满分答卷，你们是当之无愧的冠军团队！',
     icon: 'fa-crown',
     winners: [
-      { name: '何世炎', department: 'BI应用组', avatar: 'images/何世炎.jpg' },
-      { name: '黄彬翔', department: 'BI应用组', avatar: 'images/黄彬翔.jpg' },
-      { name: '蒋莲东', department: 'BI应用组', avatar: 'images/蒋莲东.jpg' },
-      { name: '罗盛源', department: 'BI应用组', avatar: 'images/罗盛源.jpg' },
-      { name: '欧阳梓贤', department: 'BI应用组', avatar: 'images/欧阳梓贤.jpg' },
-      { name: '谭润峰', department: 'BI应用组', avatar: 'images/谭润峰.jpg' },
-      { name: '徐强', department: 'BI应用组', avatar: 'images/徐强.jpg' },
-      { name: '赵婕', department: 'BI应用组', avatar: 'images/赵婕.jpg' },
-      { name: '赵星宇', department: 'BI应用组', avatar: 'images/赵星宇.jpg' },
-      { name: '左华丽', department: 'BI应用组', avatar: 'images/左华丽.jpg' }
+        { name: '何世炎', department: 'BI应用组', avatar: '/images/HSY.jpg' },
+        { name: '黄彬翔', department: 'BI应用组', avatar: '/images/HBX.jpg' },
+        { name: '蒋莲东', department: 'BI应用组', avatar: '/images/JLD.jpg' },
+        { name: '罗盛源', department: 'BI应用组', avatar: '/images/LSY.jpg' },
+        { name: '欧阳梓贤', department: 'BI应用组', avatar: '/images/OYZX.jpg' },
+        { name: '谭润峰', department: 'BI应用组', avatar: '/images/TRF.jpg' },
+        { name: '徐强', department: 'BI应用组', avatar: '/images/XQ.jpg' },
+        { name: '赵婕', department: 'BI应用组', avatar: '/images/ZJ.jpg' },
+        { name: '赵星宇', department: 'BI应用组', avatar: '/images/ZXY.jpg' },
+        { name: '左华丽', department: 'BI应用组', avatar: '/images/ZHL.jpg' }
     ],
     scripts: {
       preReveal: `最后，我们要揭晓今晚的压轴大奖——【优秀KPI团队】。数据说明一切，实力铸就荣耀！`,
