@@ -300,7 +300,7 @@ const App: React.FC = () => {
           moveRobotTo('random'); // Keep it floating
           setBotState(BotState.CELEBRATING);
           triggerConfetti();
-          speak("各位同事，2025金发科技信息管理部年度颁奖盛典圆满礼成！再次祝贺所有获奖的伙伴，你们是我们的骄傲！感谢大家的辛勤付出，亲切地祝大家2026马年大吉，万事如意，马到成功！");
+          speak("各位同事，2025金发科技信息管理部年度颁奖环节圆满礼成！小信再次祝贺所有获奖的伙伴，你们是我们的骄傲！接下来，小信也要把舞台交还给维克主持人啦，我们明年见吧，再见！");
         }
         break;
         
