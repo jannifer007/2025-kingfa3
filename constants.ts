@@ -229,7 +229,7 @@ export const AWARDS: Award[] = [
     icon: 'fa-crown',
     winners: [
         { name: '何世炎', department: 'BI应用组', avatar: '/images/HSY.jpg' },
-        { name: '黄彬翔', department: 'BI应用组', avatar: '/images/HBX.jpg' },
+        { name: '黄彬祥', department: 'BI应用组', avatar: '/images/HBX.jpg' },
         { name: '蒋莲东', department: 'BI应用组', avatar: '/images/JLD.jpg' },
         { name: '罗盛源', department: 'BI应用组', avatar: '/images/LSY.jpg' },
         { name: '欧阳梓贤', department: 'BI应用组', avatar: '/images/OYZX.jpg' },
@@ -241,7 +241,7 @@ export const AWARDS: Award[] = [
     ],
     scripts: {
       preReveal: `最后，我们要揭晓今天的压轴大奖——【优秀KPI团队】。数据说明一切，实力铸就荣耀！`,
-      reveal: `获奖团队是：逼哎应用组！他们分别是：何世炎、黄彬翔、蒋莲东、罗盛源、欧阳梓贤、谭润峰、徐强、赵婕、赵星宇、左华丽。你们团结协作，使命必达，用完美的数据交出了满分答卷。让我们以最热烈的掌声，有请顾部上台为冠军团队颁奖！`,
+      reveal: `获奖团队是：逼哎应用组！他们分别是：何世炎、黄彬祥、蒋莲东、罗盛源、欧阳梓贤、谭润峰、徐强、赵婕、赵星宇、左华丽。你们团结协作，使命必达，用完美的数据交出了满分答卷。让我们以最热烈的掌声，有请顾部上台为冠军团队颁奖！`,
       postReveal: `聚是一团火，散是满天星。祝贺逼哎应用组，你们是全场的焦点！`
     }
   }
