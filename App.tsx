@@ -163,7 +163,7 @@ const App: React.FC = () => {
       utterance.voice = selectedVoice;
     }
     
-    utterance.rate = 1.0;
+    utterance.rate = 1.4;
     utterance.volume = 1.0; // Max volume for speech
     
     utterance.onend = () => {
