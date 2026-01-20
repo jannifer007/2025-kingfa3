@@ -300,12 +300,13 @@ const App: React.FC = () => {
           moveRobotTo('random'); // Keep it floating
           setBotState(BotState.CELEBRATING);
           triggerConfetti();
-          speak("各位同事，2025金发科技信息管理部年度颁奖环节圆满结束！再次祝贺所有获奖的伙伴，你们是我们的骄傲！感谢大家的辛勤付出，亲切地祝大家2026马年大吉，万事如意，马到成功！", () => {
+          speak("各位同事，2025金发科技信息管理部年度颁奖环节圆满结束！小新再次祝贺所有获奖的伙伴，你们是我们的骄傲！感谢大家！接下来小信就要把舞台交还给维克主持人啦，我们明年见吧，再见!", () => {
              // Stop music 5 seconds after the final speech ends
              setTimeout(() => {
                 safePause(mainBgmRef.current);
              }, 2000);
           });
+        }
         break;
         
        case CeremonyPhase.FINISHED:
