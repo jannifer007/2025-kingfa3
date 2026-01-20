@@ -183,7 +183,7 @@ export const AWARDS: Award[] = [
     icon: 'fa-tasks',
     winners: [
         { name: '龙月桂', department: '销售贸易实施组', avatar: '/images/LYG.jpg' },
-        { name: '章浩鑫', department: '网络组', avatar: '/images/CHX.jpg' }
+        { name: '章浩鑫', department: '网络组', avatar: '/images/ZHX.jpg' }
     ],
     scripts: {
       preReveal: `运筹帷幄，决胜千里。接下来要揭晓的是【优秀项目经理】。`,
