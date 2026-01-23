@@ -396,10 +396,10 @@ const App: React.FC = () => {
         <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-red-950/90 backdrop-blur-md transition-opacity duration-1000">
           <div className="relative mb-12 text-center px-4">
              <div className="absolute inset-0 bg-yellow-500 blur-3xl opacity-20 animate-pulse"></div>
-             <h1 className="relative text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 via-yellow-500 to-red-400 drop-shadow-2xl text-center leading-tight mb-6">
+             <h1 className="relative text-5xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 via-yellow-500 to-red-400 drop-shadow-2xl text-center leading-tight mb-6">
                2025 金发科技
              </h1>
-             <p className="text-white text-3xl md:text-5xl font-bold tracking-widest uppercase drop-shadow-lg">
+             <p className="text-white text-3xl md:text-6xl font-bold tracking-widest uppercase drop-shadow-lg">
                信息管理部颁奖环节
              </p>
           </div>
@@ -409,8 +409,8 @@ const App: React.FC = () => {
             className="group relative mt-8 px-20 py-8 bg-gradient-to-r from-yellow-600 to-red-600 rounded-full text-3xl font-black shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:scale-105 transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-4">
-              <i className="fas fa-play text-xl"></i> 
-              {hasStartedSpeechRef.current ? "进入颁奖" : "开启典礼"}
+              <i className="fas fa-play text-2xl"></i> 
+              {hasStartedSpeechRef.current ? "进入颁奖" : "开启环节"}
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
@@ -419,21 +419,21 @@ const App: React.FC = () => {
 
       {/* Main Content Area - Grid of Awards */}
       <div className={`flex-1 flex flex-col justify-center transition-all duration-1000 ${phase === CeremonyPhase.START_SCREEN ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-          <header className="relative z-10 text-center pt-4 mb-4 shrink-0">
-            <div className="flex justify-center items-center gap-4">
-                <i className="fas fa-dragon text-yellow-500 text-3xl animate-pulse"></i>
-                <h1 className="text-2xl md:text-3xl font-black text-white drop-shadow-xl tracking-wider">
+          <header className="relative z-10 text-center pt-6 mb-4 shrink-0">
+            <div className="flex justify-center items-center gap-6">
+                <i className="fas fa-dragon text-yellow-500 text-4xl animate-pulse"></i>
+                <h1 className="text-3xl md:text-5xl font-black text-white drop-shadow-xl tracking-wider">
                 KINGFA 金发科技
                 </h1>
-                <i className="fas fa-dragon text-yellow-500 text-3xl animate-pulse scale-x-[-1]"></i>
+                <i className="fas fa-dragon text-yellow-500 text-4xl animate-pulse scale-x-[-1]"></i>
             </div>
           </header>
 
-          <main className={`relative z-10 w-full max-w-[1600px] mx-auto grid 
+          <main className={`relative z-10 w-full max-w-[1700px] mx-auto grid 
             ${isFinished 
                 ? 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 content-center h-full overflow-hidden py-4' 
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 content-center h-full max-h-[90vh]'
-            } px-8`}>
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-center h-full max-h-[85vh]'
+            } px-8 pb-8`}>
             {visibleAwards.map((award, index) => {
               // Calculate global index
               const globalIndex = isFinished ? index : visibleStart + index;
